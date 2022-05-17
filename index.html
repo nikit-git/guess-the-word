@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word Guesser</title>
+</head>
+
+<body>
+
+  <script>
+    // Приветствие и приглашение играть
+    let entryQuestion = confirm("Привет, сыграем в Поле Чудес?");
+
+    // Цикл с, собственно, телом игры
+    while (entryQuestion) {
+
+      // 1. Подготовка загадываемого слова
+      let arrayOfWords = [
+        "слон", "мама", "стул", "краб", "очки", "рука", "жаба", "нога", "мука", "каша", "чаша", "гиря", "окно"
+      ];
+      let actualWord = arrayOfWords[Math.floor(Math.random() * arrayOfWords.length)];
+      console.log(actualWord);
+      let hiddenWord = [];
+      for (let i = 0; i < actualWord.length; i++) {
+        hiddenWord.push("-");
+      }
+
+      // 2. Цикл с загадыванием букв
+      while (hiddenWord.indexOf("-") >= 0) {
+        // 2.1 Задаем вопрос
+        let answer = prompt(`Угадайте букву в слове:   ${hiddenWord.join(" ")} 
+или нажмите отмена для выхода из игры`);
+        const regExp = /[а-яА-ЯёЁ]/;
+
+        // 2.2 Проверяем ответ на желание выйти из игры
+        if (regExp.test(answer)) {
+          for (let i = 0; i < actualWord.length; i++) {
+            if (answer.toLowerCase() === actualWord[i]) { hiddenWord[i] = answer.toUpperCase() }
+          }
+        }
+        // 2.3 Проверяем соответсвует ли ввод ожидаемому и открываем угаданную букву
+        else if (!answer) {
+          entryQuestion = false;
+          break;
+        }
+        // 2.4 Информируем о допустимом вводе
+        else {
+          alert("Ответом может быть только одиночная буква кириллицы");
+        }
+
+        // 3. Проверяем  угадано ли слово целиком и приглашем сыграть еще раз
+        if (hiddenWord.indexOf("-") < 0) {
+          entryQuestion = confirm(`Поздравляем, вы отгадали слово - ${hiddenWord.join("")}! Еще одну игру сыграем?`);
+        }
+      }
+
+    }
+
+  </script>
+</body>
+
+</html>
