@@ -1,0 +1,1 @@
+This is a pet project of creating "Word Guesser" game
