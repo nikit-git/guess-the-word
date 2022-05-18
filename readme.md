@@ -1,1 +1,1 @@
-This is a pet project of creating "Word Guesser" game
+This is a pet project of creating "Guess the Word" game
